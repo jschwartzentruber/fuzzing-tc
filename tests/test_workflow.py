@@ -71,8 +71,8 @@ def test_configure_local(tmp_path):
     }
 
 
-def test_configure_secret(mock_taskcluster):
-    workflow = Workflow()
+def test_configure_secret(mock_taskcluster_workflow):
+    workflow = mock_taskcluster_workflow
 
     # Read a remote conf from Taskcluster secret
     assert workflow.configure(secret="mock-fuzzing-tc") == {

@@ -5,16 +5,18 @@
 # obtain one at http://mozilla.org/MPL/2.0/.
 
 import argparse
-import logging
 import os
 
-from decision.workflow import Workflow
+from pool_launch.launcher import PoolLauncher
 
 
-def main():
-    parser = argparse.ArgumentParser("Fuzzing decision task")
+def main(args=None):
+    parser = argparse.ArgumentParser(prog="fuzzing-pool-launch")
     parser.add_argument(
-        "pool_name", type=str, help="The target fuzzing pool to create tasks for"
+        "--pool-name",
+        type=str,
+        help="The target fuzzing pool to create tasks for",
+        default=os.environ.get("FUZZING_POOL"),
     )
     parser.add_argument(
         "--taskcluster-secret",
@@ -27,29 +29,19 @@ def main():
         type=str,
         help="Local configuration file replacing Taskcluster secrets for fuzzing",
     )
-    parser.add_argument(
-        "--task-id",
-        type=str,
-        help="Taskcluster decision task creating new fuzzing tasks",
-        default=os.environ.get("TASK_ID"),
-    )
-    args = parser.parse_args()
-
-    # We need both task & task group information
-    if not args.task_id:
-        raise Exception("Missing decision task id")
-
-    # Setup logger
-    logging.basicConfig(level=logging.INFO)
+    parser.add_argument("command", help="docker command-line", nargs=argparse.REMAINDER)
+    args = parser.parse_args(args=args)
 
     # Configure workflow using the secret or local configuration
-    workflow = Workflow()
-    config = workflow.configure(
+    launcher = PoolLauncher(args.command, args.pool_name)
+    config = launcher.configure(
         local_path=args.configuration, secret=args.taskcluster_secret
     )
 
-    # Retrieve remote repositories
-    workflow.clone(config)
+    if config is not None:
+        # Retrieve remote repository
+        launcher.clone(config)
+        launcher.load_params()
 
     # Build all task definitions for that pool
-    workflow.build_tasks(args.pool_name, args.task_id)
+    launcher.exec()

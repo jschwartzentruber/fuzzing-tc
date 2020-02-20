@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 from datetime import datetime
 
 import pytest
@@ -56,7 +57,7 @@ VALID_HOOK = {
     "emailOnError": True,
     "hookGroupId": "project-fuzzing",
     "hookId": "linux-test",
-    "name": "Amazing fuzzing pool",
+    "name": "linux-test",
     "owner": "fuzzing+taskcluster@mozilla.com",
     "schedule": [],
     "task": {
@@ -350,7 +351,7 @@ def test_tasks():
                 "artifacts": {},
                 "cache": {},
                 "capabilities": {},
-                "env": {},
+                "env": {"TASKCLUSTER_FUZZING_POOL": "test"},
                 "features": {"taskclusterProxy": True},
                 "image": "MozillaSecurity/fuzzer:latest",
                 "maxRunTime": 3600,
