@@ -8,8 +8,8 @@ import logging
 import os
 import sys
 
-from common.pool import PoolConfiguration
-from common.workflow import Workflow
+from ..common.pool import PoolConfiguration
+from ..common.workflow import Workflow
 
 logger = logging.getLogger()
 

@@ -7,7 +7,7 @@
 import argparse
 import os
 
-from pool_launch.launcher import PoolLauncher
+from .launcher import PoolLauncher
 
 
 def main(args=None):

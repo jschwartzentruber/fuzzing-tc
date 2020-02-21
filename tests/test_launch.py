@@ -7,11 +7,11 @@ from unittest.mock import patch
 import pytest
 import yaml
 
-from pool_launch import cli
-from pool_launch.launcher import PoolLauncher
+from fuzzing_tc.pool_launch import cli
+from fuzzing_tc.pool_launch.launcher import PoolLauncher
 
 
-@patch("pool_launch.cli.PoolLauncher", autospec=True)
+@patch("fuzzing_tc.pool_launch.cli.PoolLauncher", autospec=True)
 def test_main_calls(mock_launcher):
     # if configure returns None, clone/load_params should not be called
     mock_launcher.return_value.configure.return_value = None

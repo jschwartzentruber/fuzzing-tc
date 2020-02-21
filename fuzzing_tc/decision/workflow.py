@@ -14,13 +14,13 @@ import tempfile
 import yaml
 from tcadmin.appconfig import AppConfig
 
-from common.pool import MachineTypes
-from common.workflow import Workflow as CommonWorkflow
-from decision import HOOK_PREFIX
-from decision import WORKER_POOL_PREFIX
-from decision.pool import PoolConfiguration
-from decision.providers import AWS
-from decision.providers import GCP
+from ..common.pool import MachineTypes
+from ..common.workflow import Workflow as CommonWorkflow
+from . import HOOK_PREFIX
+from . import WORKER_POOL_PREFIX
+from .pool import PoolConfiguration
+from .providers import AWS
+from .providers import GCP
 
 logger = logging.getLogger()
 

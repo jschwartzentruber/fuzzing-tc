@@ -14,8 +14,7 @@ from tcadmin.resources import Hook
 from tcadmin.resources import Role
 from tcadmin.resources import WorkerPool
 
-from common.pool import PoolConfiguration as CommonPoolConfiguration
-
+from ..common.pool import PoolConfiguration as CommonPoolConfiguration
 from . import DECISION_TASK_SECRET
 from . import HOOK_PREFIX
 from . import OWNER_EMAIL

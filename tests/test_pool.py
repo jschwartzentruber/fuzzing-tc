@@ -5,7 +5,7 @@ from datetime import datetime
 import pytest
 import slugid
 
-from decision.pool import PoolConfiguration
+from fuzzing_tc.decision.pool import PoolConfiguration
 
 
 @pytest.mark.parametrize(

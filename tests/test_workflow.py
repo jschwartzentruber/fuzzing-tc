@@ -5,7 +5,7 @@ import re
 import pytest
 import yaml
 
-from decision.workflow import Workflow
+from fuzzing_tc.decision.workflow import Workflow
 
 YAML_CONF = """---
 fuzzing_config:

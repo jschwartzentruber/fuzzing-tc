@@ -7,10 +7,10 @@ from unittest.mock import Mock
 import pytest
 import responses
 
-from common.pool import MachineTypes
-from decision.providers import AWS
-from decision.providers import GCP
-from decision.workflow import Workflow
+from fuzzing_tc.common.pool import MachineTypes
+from fuzzing_tc.decision.providers import AWS
+from fuzzing_tc.decision.providers import GCP
+from fuzzing_tc.decision.workflow import Workflow
 
 FIXTURES_DIR = os.path.join(os.path.dirname(__file__), "fixtures")
 

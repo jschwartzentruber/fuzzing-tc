@@ -8,7 +8,7 @@ import argparse
 import logging
 import os
 
-from decision.workflow import Workflow
+from .workflow import Workflow
 
 
 def main():
