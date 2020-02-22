@@ -6,6 +6,7 @@
 
 import argparse
 import os
+import pathlib
 
 from .launcher import PoolLauncher
 
@@ -26,7 +27,7 @@ def main(args=None):
     )
     parser.add_argument(
         "--configuration",
-        type=str,
+        type=pathlib.Path,
         help="Local configuration file replacing Taskcluster secrets for fuzzing",
     )
     parser.add_argument("command", help="docker command-line", nargs=argparse.REMAINDER)
