@@ -33,6 +33,16 @@ def main():
         help="Taskcluster decision task creating new fuzzing tasks",
         default=os.environ.get("TASK_ID"),
     )
+    parser.add_argument(
+        "--git-repository",
+        help="A git repository containing the Fuzzing configuration",
+        default=os.environ.get("FUZZING_GIT_REPOSITORY"),
+    )
+    parser.add_argument(
+        "--git-revision",
+        help="A git revision for the fuzzing git repository",
+        default=os.environ.get("FUZZING_GIT_REVISION"),
+    )
     args = parser.parse_args()
 
     # We need both task & task group information
@@ -45,11 +55,14 @@ def main():
     # Configure workflow using the secret or local configuration
     workflow = Workflow()
     config = workflow.configure(
-        local_path=args.configuration, secret=args.taskcluster_secret
+        local_path=args.configuration,
+        secret=args.taskcluster_secret,
+        fuzzing_git_repository=args.git_repository,
+        fuzzing_git_revision=args.git_revision,
     )
 
     # Retrieve remote repositories
     workflow.clone(config)
 
     # Build all task definitions for that pool
-    workflow.build_tasks(args.pool_name, args.task_id)
+    workflow.build_tasks(args.pool_name, args.task_id, config)

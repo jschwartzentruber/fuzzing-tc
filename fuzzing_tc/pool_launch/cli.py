@@ -29,13 +29,26 @@ def main(args=None):
         type=str,
         help="Local configuration file replacing Taskcluster secrets for fuzzing",
     )
+    parser.add_argument(
+        "--git-repository",
+        help="A git repository containing the Fuzzing configuration",
+        default=os.environ.get("FUZZING_GIT_REPOSITORY"),
+    )
+    parser.add_argument(
+        "--git-revision",
+        help="A git revision for the fuzzing git repository",
+        default=os.environ.get("FUZZING_GIT_REVISION"),
+    )
     parser.add_argument("command", help="docker command-line", nargs=argparse.REMAINDER)
     args = parser.parse_args(args=args)
 
     # Configure workflow using the secret or local configuration
     launcher = PoolLauncher(args.command, args.pool_name)
     config = launcher.configure(
-        local_path=args.configuration, secret=args.taskcluster_secret
+        local_path=args.configuration,
+        secret=args.taskcluster_secret,
+        fuzzing_git_repository=args.git_repository,
+        fuzzing_git_revision=args.git_revision,
     )
 
     if config is not None:
