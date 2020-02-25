@@ -5,6 +5,7 @@
 # obtain one at http://mozilla.org/MPL/2.0/.
 
 import argparse
+import logging
 import os
 import pathlib
 
@@ -32,6 +33,9 @@ def main(args=None):
     )
     parser.add_argument("command", help="docker command-line", nargs=argparse.REMAINDER)
     args = parser.parse_args(args=args)
+
+    # Setup logger
+    logging.basicConfig(level=logging.INFO)
 
     # Configure workflow using the secret or local configuration
     launcher = PoolLauncher(args.command, args.pool_name)
