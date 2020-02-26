@@ -4,45 +4,24 @@
 # v. 2.0. If a copy of the MPL was not distributed with this file, You can
 # obtain one at http://mozilla.org/MPL/2.0/.
 
-import argparse
 import logging
 import os
-import pathlib
+
+from fuzzing_tc.common.cli import build_cli_parser
 
 from .workflow import Workflow
 
 
 def main():
-    parser = argparse.ArgumentParser("Fuzzing decision task")
+    parser = build_cli_parser(prog="fuzzing-pool-launch")
     parser.add_argument(
         "pool_name", type=str, help="The target fuzzing pool to create tasks for"
-    )
-    parser.add_argument(
-        "--taskcluster-secret",
-        type=str,
-        help="Taskcluster Secret path for configuration",
-        default=os.environ.get("TASKCLUSTER_SECRET"),
-    )
-    parser.add_argument(
-        "--configuration",
-        type=pathlib.Path,
-        help="Local configuration file replacing Taskcluster secrets for fuzzing",
     )
     parser.add_argument(
         "--task-id",
         type=str,
         help="Taskcluster decision task creating new fuzzing tasks",
         default=os.environ.get("TASK_ID"),
-    )
-    parser.add_argument(
-        "--git-repository",
-        help="A git repository containing the Fuzzing configuration",
-        default=os.environ.get("FUZZING_GIT_REPOSITORY"),
-    )
-    parser.add_argument(
-        "--git-revision",
-        help="A git revision for the fuzzing git repository",
-        default=os.environ.get("FUZZING_GIT_REVISION"),
     )
     args = parser.parse_args()
 
