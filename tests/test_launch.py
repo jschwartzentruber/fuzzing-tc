@@ -88,3 +88,21 @@ def test_load_params(tmp_path):
 
     with pytest.raises(AssertionError):
         launcher.load_params()
+
+
+def test_launch_exec(tmp_path):
+    with patch("os.execvpe"), patch("os.dup2"):
+        log_dir = tmp_path / "logs"
+        pool = PoolLauncher(["cmd"], "testpool")
+        pool.log_dir = str(log_dir)
+        pool.exec()
+        os.dup2.assert_not_called()
+        os.execvpe.assert_called_once_with("cmd", ["cmd"], pool.environment)
+        assert not log_dir.is_dir()
+
+        os.execvpe.reset_mock()
+        pool.in_taskcluster = True
+        pool.exec()
+        assert os.dup2.call_count == 2
+        os.execvpe.assert_called_once_with("cmd", ["cmd"], pool.environment)
+        assert log_dir.is_dir()
