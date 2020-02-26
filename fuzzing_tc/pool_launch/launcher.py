@@ -25,9 +25,6 @@ class PoolLauncher(Workflow):
         self.command = command.copy()
         self.environment = os.environ.copy()
         self.pool_name = pool_name
-        self.in_taskcluster = (
-            "TASK_ID" in os.environ and "TASKCLUSTER_ROOT_URL" in os.environ
-        )
         self.log_dir = "/logs"
 
     def clone(self, config):
