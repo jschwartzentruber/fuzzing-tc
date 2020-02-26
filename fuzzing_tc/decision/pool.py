@@ -111,7 +111,9 @@ class PoolConfiguration(CommonPoolConfiguration):
             "tags": {},
         }
         if env is not None:
-            assert set(decision_task["payload"]["env"]).isdisjoint(set(env))
+            assert set(decision_task["payload"]["env"].keys()).isdisjoint(
+                set(env.keys())
+            )
             decision_task["payload"]["env"].update(env)
 
         pool = WorkerPool(
