@@ -124,10 +124,7 @@ class PoolConfiguration:
 
         # "normal" fields
         self.pool_id = pool_id
-        if base_dir is None:
-            self.base_dir = pathlib.Path.cwd()
-        else:
-            self.base_dir = base_dir
+        self.base_dir = base_dir or pathlib.Path.cwd()
 
         # check that all fields are of the right type (or None)
         for field, cls in FIELD_TYPES.items():
