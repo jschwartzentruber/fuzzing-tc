@@ -191,10 +191,7 @@ class PoolConfiguration:
         self._flatten(_flattened)
 
     def assert_complete(self):
-        missing = set()
-        for field in FIELD_TYPES:
-            if getattr(self, field) is None:
-                missing.add(field)
+        missing = {field for field in FIELD_TYPES if getattr(self, field) is None}
         assert not missing, f"Pool is missing fields: {list(missing)!r}"
 
     def _flatten(self, flattened):
