@@ -148,19 +148,6 @@ class PoolConfiguration(CommonPoolConfiguration):
             )
             decision_task["payload"]["env"].update(env)
 
-        # add docker worker config for capability scopes
-        scopes = set(self.scopes) | set(decision_task_scopes)
-        docker_config = {
-            "linkInfo": {"binds": [{"source": "/dev/shm", "target": "/dev/shm"}]}
-        }
-        if "docker-worker:capability:privileged" in scopes:
-            docker_config["allowPrivileged"] = True
-        if docker_config:
-            for machine in config["launchConfigs"]:
-                worker_config = machine.setdefault("workerConfig", {})
-                machine_docker_config = worker_config.setdefault("dockerConfig", {})
-                machine_docker_config.update(docker_config)
-
         pool = WorkerPool(
             workerPoolId=f"{WORKER_POOL_PREFIX}/{self.task_id}",
             providerId=PROVIDER_IDS[self.cloud],
