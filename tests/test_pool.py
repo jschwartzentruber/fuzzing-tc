@@ -174,14 +174,12 @@ def test_aws_resources(env, mock_clouds, mock_machines):
                     "workerConfig": {
                         "dockerConfig": {
                             "allowPrivileged": True,
-                            "linkInfo": {
-                                "binds": [{"source": "/dev/shm", "target": "/dev/shm"}]
-                            },
+                            "allowDisableSeccomp": True,
                         },
                         "genericWorker": {
                             "config": {
                                 "anyKey": "anyValue",
-                                "deploymentId": "be6214547ba5f9bb",
+                                "deploymentId": "9e37fbdaa55dbb5d",
                                 "os": "linux",
                                 "wstAudience": "communitytc",
                                 "wstServerURL": "https://community-websocktunnel.services.mozilla.com",
@@ -267,13 +265,11 @@ def test_gcp_resources(env, mock_clouds, mock_machines):
                     "workerConfig": {
                         "dockerConfig": {
                             "allowPrivileged": True,
-                            "linkInfo": {
-                                "binds": [{"source": "/dev/shm", "target": "/dev/shm"}]
-                            },
+                            "allowDisableSeccomp": True,
                         },
                         "genericWorker": {
                             "config": {
-                                "deploymentId": "0286a93a3be3098a",
+                                "deploymentId": "39028f42dc387ad8",
                                 "wstAudience": "communitytc",
                                 "wstServerURL": "https://community-websocktunnel.services.mozilla.com",
                             },
@@ -304,13 +300,11 @@ def test_gcp_resources(env, mock_clouds, mock_machines):
                     "workerConfig": {
                         "dockerConfig": {
                             "allowPrivileged": True,
-                            "linkInfo": {
-                                "binds": [{"source": "/dev/shm", "target": "/dev/shm"}]
-                            },
+                            "allowDisableSeccomp": True,
                         },
                         "genericWorker": {
                             "config": {
-                                "deploymentId": "0286a93a3be3098a",
+                                "deploymentId": "39028f42dc387ad8",
                                 "wstAudience": "communitytc",
                                 "wstServerURL": "https://community-websocktunnel.services.mozilla.com",
                             },
@@ -341,13 +335,11 @@ def test_gcp_resources(env, mock_clouds, mock_machines):
                     "workerConfig": {
                         "dockerConfig": {
                             "allowPrivileged": True,
-                            "linkInfo": {
-                                "binds": [{"source": "/dev/shm", "target": "/dev/shm"}]
-                            },
+                            "allowDisableSeccomp": True,
                         },
                         "genericWorker": {
                             "config": {
-                                "deploymentId": "0286a93a3be3098a",
+                                "deploymentId": "39028f42dc387ad8",
                                 "wstAudience": "communitytc",
                                 "wstServerURL": "https://community-websocktunnel.services.mozilla.com",
                             },

@@ -24,10 +24,7 @@ class Provider(object):
 
         out.update({"shutdown": {"enabled": True, "afterIdleSeconds": 1}})
         out["dockerConfig"].update(
-            {
-                "allowPrivileged": True,
-                "linkInfo": {"binds": [{"source": "/dev/shm", "target": "/dev/shm"}]},
-            }
+            {"allowPrivileged": True, "allowDisableSeccomp": True}
         )
 
         # Fixed config for websocket tunnel
