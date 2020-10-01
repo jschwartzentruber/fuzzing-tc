@@ -173,7 +173,7 @@ class PoolConfiguration(CommonPoolConfiguration):
         decision_task = {
             "created": {"$fromNow": "0 seconds"},
             "deadline": {"$fromNow": "1 hour"},
-            "expires": {"$fromNow": "1 week"},
+            "expires": {"$fromNow": "1 day"},
             "extra": {},
             "metadata": {
                 "description": DESCRIPTION,
